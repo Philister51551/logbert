@@ -118,8 +118,12 @@ class Predictor():
                 tim_seqs += tim_seq
 
         # sort seq_pairs by seq len
-        log_seqs = np.array(log_seqs)
-        tim_seqs = np.array(tim_seqs)
+        # log_seqs = np.array(log_seqs)
+        # tim_seqs = np.array(tim_seqs)
+
+        # TODO: 显式告诉 Numpy：我知道它们长度不一样，请作为对象数组处理
+        log_seqs = np.array(log_seqs, dtype=object)
+        tim_seqs = np.array(tim_seqs, dtype=object)
 
         test_len = list(map(len, log_seqs))
         test_sort_index = np.argsort(-1 * np.array(test_len))
@@ -150,8 +154,12 @@ class Predictor():
                                  corpus_lines=self.corpus_lines, on_memory=self.on_memory, predict_mode=True, mask_ratio=self.mask_ratio)
 
         # use large batch size in test data
-        data_loader = DataLoader(seq_dataset, batch_size=self.batch_size, num_workers=self.num_workers,
-                                 collate_fn=seq_dataset.collate_fn)
+        data_loader = DataLoader(seq_dataset,
+                                 batch_size=self.batch_size,
+                                 num_workers=self.num_workers,
+                                 collate_fn=seq_dataset.collate_fn,
+                                 # TODO: 开启 pin_memory (内存锁页)
+                                 pin_memory=True)
 
         for idx, data in enumerate(data_loader):
             data = {key: value.to(self.device) for key, value in data.items()}
@@ -203,7 +211,10 @@ class Predictor():
                     # if dist > 0.25:
                     #     pass
 
-                if idx < 10 or idx % 1000 == 0:
+                # if idx < 10 or idx % 1000 == 0:
+
+                # TODO: 优化后：每 100 个 Batch 打印一次，且每个 Batch 只打印第一条数据
+                if (idx < 5 or idx % 100 == 0) and i == 0:
                     print(
                         "{}, #time anomaly: {} # of undetected_tokens: {}, # of masked_tokens: {} , "
                         "# of total logkey {}, deepSVDD_label: {} \n".format(

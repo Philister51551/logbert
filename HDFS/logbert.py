@@ -31,6 +31,8 @@ options["mask_ratio"] = 0.65
 # sample ratio
 options["train_ratio"] = 1
 options["valid_ratio"] = 0.1
+
+# TODO: 测试集使用比例
 options["test_ratio"] = 1
 
 # features
@@ -38,7 +40,10 @@ options["is_logkey"] = True
 options["is_time"] = False
 
 options["hypersphere_loss"] = True
-options["hypersphere_loss_test"] = False
+# options["hypersphere_loss_test"] = False
+
+# TODO: 显式开启测试集中超球体距离检测
+options["hypersphere_loss_test"] = True
 
 options["scale"] = None # MinMaxScaler()
 options["scale_path"] = options["model_dir"] + "scale.pkl"
@@ -50,11 +55,18 @@ options["attn_heads"] = 4
 
 options["epochs"] = 200
 options["n_epochs_stop"] = 10
-options["batch_size"] = 32
+# options["batch_size"] = 32
+
+# TODO: 修改batch_size充分利用GPU
+options["batch_size"] = 192
 
 options["corpus_lines"] = None
 options["on_memory"] = True
-options["num_workers"] = 5
+# options["num_workers"] = 5
+
+# TODO: 强制改为 0，让主进程自己加载数据，最稳
+options["num_workers"] = 16
+
 options["lr"] = 1e-3
 options["adam_beta1"] = 0.9
 options["adam_beta2"] = 0.999

@@ -75,3 +75,22 @@ baselines.ipynb
 ~/.dataset //Stores original datasets after downloading
 project/output //Stores intermediate files and final results during execution
 ```
+
+### mac上传文件到server
+```
+ssh ...
+# 上传文件
+scp -P 端口号 本地文件路径 root@地址:/root/autodl-tmp/
+# 上传文件夹
+scp -P 端口号 -r 本地文件夹 root@地址:/root/autodl-tmp/
+# 本地运行
+scp -P 43355 /Users/wangzhi/Downloads/dataset/HDFS_v1.zip root@region-41.seetacloud.com:/root/.dataset/
+
+```
+### 监控AutoDL状态
+```
+# (实时动态查看GPU（每秒刷新一次）)
+watch -n 1 nvidia-smi
+# (实时动态查看CPU)
+htop
+```
