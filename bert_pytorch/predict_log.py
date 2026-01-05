@@ -120,7 +120,6 @@ class Predictor():
         # sort seq_pairs by seq len
         # log_seqs = np.array(log_seqs)
         # tim_seqs = np.array(tim_seqs)
-
         # TODO: 显式告诉 Numpy：我知道它们长度不一样，请作为对象数组处理
         log_seqs = np.array(log_seqs, dtype=object)
         tim_seqs = np.array(tim_seqs, dtype=object)
@@ -212,7 +211,6 @@ class Predictor():
                     #     pass
 
                 # if idx < 10 or idx % 1000 == 0:
-
                 # TODO: 优化后：每 100 个 Batch 打印一次，且每个 Batch 只打印第一条数据
                 if (idx < 5 or idx % 100 == 0) and i == 0:
                     print(

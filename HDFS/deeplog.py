@@ -25,7 +25,9 @@ options['device'] = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Smaple
 options['sample'] = "sliding_window"
-options['window_size'] = 20  # if fix_window
+# options['window_size'] = 20  # if fix_window
+# TODO: Window Size (滑窗大小)
+options['window_size'] = 10  # if fix_window
 options["min_len"] = 10
 
 options['train_ratio'] = 1
@@ -48,7 +50,9 @@ options['input_size'] = 1
 options['hidden_size'] = 64
 options['num_layers'] = 2
 options["embedding_dim"] = 50
-options["vocab_size"] = 17
+# options["vocab_size"] = 17
+# TODO: 词汇表大小 (Vocab)
+options["vocab_size"] = 29
 options['num_classes'] = options["vocab_size"]
 
 # Train
@@ -68,7 +72,9 @@ options['save_dir'] = options["output_dir"] + "deeplog/"
 
 # Predict
 options['model_path'] = options["save_dir"] + "bestloss.pth"
-options['num_candidates'] = 9
+# options['num_candidates'] = 9
+# TODO: 修改候选数量 (K):
+options['num_candidates'] = 1
 options["threshold"] = None
 options["gaussian_mean"] = 0
 options["gaussian_std"] = 0

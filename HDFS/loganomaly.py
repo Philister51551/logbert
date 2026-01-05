@@ -37,7 +37,9 @@ options["is_time"] = False
 # Features
 options['sequentials'] = options["is_logkey"]
 options['quantitatives'] = True
-options['semantics'] = False
+# options['semantics'] = False
+# TODO: 配置语义向量
+options['semantics'] = True
 options['parameters'] = options["is_time"]
 options['feature_num'] = sum(
     [options['sequentials'], options['quantitatives'], options['semantics'], options['parameters']])
@@ -47,7 +49,9 @@ options['input_size'] = 1
 options['hidden_size'] = 64
 options['num_layers'] = 2
 options["embedding_dim"] = 50
-options["vocab_size"] = 17
+# options["vocab_size"] = 17
+# TODO: 词汇表大小 (Vocab)
+options["vocab_size"] = 29
 options['num_classes'] = options["vocab_size"]
 
 # Train

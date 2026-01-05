@@ -129,7 +129,6 @@ class LogDataset(Dataset):
         # output["bert_label"] = torch.tensor(output["bert_label"], dtype=torch.long)
         # output["time_input"] = torch.tensor(output["time_input"], dtype=torch.float)
         # output["time_label"] = torch.tensor(output["time_label"], dtype=torch.float)
-
         # TODO: 当前情况：你的 output["time_input"] 是一个 Python list，里面装的是 numpy 数组。直接把这个列表喂给 torch.tensor()，PyTorch 需要一个个把里面的 numpy 数组拿出来复制，效率极低。
         #       推荐做法：先用 numpy.array() 把整个列表转换成一个大的 Numpy 数组，然后再转成 Tensor。这是 C 语言层面的内存复制，速度快几十倍。
         output["bert_input"] = torch.tensor(np.array(output["bert_input"]), dtype=torch.long)
