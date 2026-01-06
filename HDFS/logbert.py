@@ -22,18 +22,22 @@ options["model_path"] = options["model_dir"] + "best_bert.pth"
 options["train_vocab"] = options["output_dir"] + "train"
 options["vocab_path"] = options["output_dir"] + "vocab.pkl"  # pickle file
 
+# options["window_size"] = 128
+# TODO: Window Size (窗口大小)
 options["window_size"] = 128
 options["adaptive_window"] = True
 options["seq_len"] = 512
 options["max_len"] = 512 # for position embedding
 options["min_len"] = 10
+# options["mask_ratio"] = 0.65
+# TODO: Mask Ratio (掩码比例)，原文建议0.4～0.5
 options["mask_ratio"] = 0.65
 # sample ratio
 options["train_ratio"] = 1
 options["valid_ratio"] = 0.1
 # options["test_ratio"] = 1
 # TODO: 测试集使用比例
-options["test_ratio"] = 0.25
+options["test_ratio"] = 1
 
 # features
 # options["is_logkey"] = True
@@ -53,6 +57,8 @@ options["scale_path"] = options["model_dir"] + "scale.pkl"
 
 # model
 options["hidden"] = 256 # embedding size
+# options["layers"] = 4
+#  TODO: Layers (模型层数)，原文2
 options["layers"] = 4
 options["attn_heads"] = 4
 
@@ -66,7 +72,7 @@ options["corpus_lines"] = None
 options["on_memory"] = True
 # options["num_workers"] = 5
 # TODO: 强制改为 0，让主进程自己加载数据，最稳
-options["num_workers"] = 16
+options["num_workers"] = 0
 
 options["lr"] = 1e-3
 options["adam_beta1"] = 0.9
