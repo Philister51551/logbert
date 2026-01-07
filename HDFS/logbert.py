@@ -45,9 +45,9 @@ options["test_ratio"] = 1
 options["is_logkey"] = True
 options["is_time"] = False
 
-
-# 确保训练时包含超球体 Loss (保持模型结构一致)
-options["hypersphere_loss"] = True
+# options["hypersphere_loss"] = False
+# TODO: 确保训练时包含超球体 Loss (保持模型结构一致)
+options["hypersphere_loss"] = False
 # options["hypersphere_loss_test"] = False
 # TODO: 显式操作测试集中超球体距离检测VHM (DeepSVDD)
 options["hypersphere_loss_test"] = False
@@ -65,8 +65,8 @@ options["attn_heads"] = 4
 options["epochs"] = 200
 options["n_epochs_stop"] = 10
 # options["batch_size"] = 32
-# TODO: 修改batch_size充分利用GPU
-options["batch_size"] = 192
+# TODO: 修改batch_size充分利用GPU，32最稳
+options["batch_size"] = 32
 
 options["corpus_lines"] = None
 options["on_memory"] = True
@@ -83,6 +83,8 @@ options["cuda_devices"] = None
 options["log_freq"] = None
 
 # predict
+# options["num_candidates"] = 6
+# TODO：微调候选集
 options["num_candidates"] = 6
 options["gaussian_mean"] = 0
 options["gaussian_std"] = 1
