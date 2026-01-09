@@ -106,17 +106,31 @@ watch -n 1 nvidia-smi
 htop
 ```
 
-### 调参记录
-| result                                                       | dataset | window_size | mask_ratio | is_logkey | hypersphere _loss | hypersphere _loss_test | Layers | batch_size | num_workers | num_candidates |      |      |      |
-| ------------------------------------------------------------ | ------- | ----------- | ---------- | --------- | ----------------- | ---------------------- | ------ | ---------- | ----------- | -------------- | ---- | ---- | ---- |
-| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8781, TN: 549329, FP: 4039, FN: 1866<br/>Precision: 68.49%, Recall: 82.47%, F1-measure: 74.84%<br/>elapsed_time: 883.600507736206 | HDFS    | 128         | 0.65       | True      | True              | False                  | 4      | 192        | 0           | 6              |      |      |      |
-| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8746, TN: 547511, FP: 5857, FN: 1901<br/>Precision: 59.89%, Recall: 82.15%, F1-measure: 69.28%<br/>elapsed_time: 932.270750284195 | HDFS    | 128         | 0.65       | True      | True              | False                  | 4      | 64         | 0           | 6              |      |      |      |
-| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8361, TN: 550526, FP: 2842, FN: 2286<br/>Precision: 74.63%, Recall: 78.53%, F1-measure: 76.53%<br/>elapsed_time: 1017.3592114448547 | HDFS    | 128         | 0.65       | True      | True              | False                  | 4      | 32         | 0           | 6              |      |      |      |
-| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8366, TN: 549240, FP: 4128, FN: 2281<br/>Precision: 66.96%, Recall: 78.58%, F1-measure: 72.30%<br/>elapsed_time: 1098.0065379142761 | HDFS    | 128         | 0.65       | True      | True              | True                   | 4      | 32         | 0           | 6              |      |      |      |
-| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8369, TN: 550850, FP: 2518, FN: 2278<br/>Precision: 76.87%, Recall: 78.60%, F1-measure: 77.73%<br/>elapsed_time: 1035.9144899845123 | HDFS    | 128         | 0.65       | True      | False             | False                  | 4      | 32         | 0           | 6              |      |      |      |
-|                                                              |         |             |            |           |                   |                        |        |            |             |                |      |      |      |
-|                                                              |         |             |            |           |                   |                        |        |            |             |                |      |      |      |
-|                                                              |         |             |            |           |                   |                        |        |            |             |                |      |      |      |
+### Baseline调参记录
+| result                                                       | dataset | is_logkey | hypersphere _loss | hypersphere _loss_test | window_size | mask_ratio | Layers | batch_size | num_workers | num_candidates |
+| ------------------------------------------------------------ | ------- | --------- | ----------------- | ---------------------- | ----------- | ---------- | ------ | ---------- | ----------- | -------------- |
+| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8781, TN: 549329, FP: 4039, FN: 1866<br/>Precision: 68.49%, Recall: 82.47%, F1-measure: 74.84%<br/>elapsed_time: 883.600507736206 | HDFS    | True      | True              | False                  | 128         | 0.65       | 4      | 192        | 0           | 6              |
+| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8746, TN: 547511, FP: 5857, FN: 1901<br/>Precision: 59.89%, Recall: 82.15%, F1-measure: 69.28%<br/>elapsed_time: 932.270750284195 | HDFS    | True      | True              | False                  | 128         | 0.65       | 4      | 64         | 0           | 6              |
+| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8361, TN: 550526, FP: 2842, FN: 2286<br/>Precision: 74.63%, Recall: 78.53%, F1-measure: 76.53%<br/>elapsed_time: 1017.3592114448547 | HDFS    | True      | True              | False                  | 128         | 0.65       | 4      | 32         | 0           | 6              |
+| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8366, TN: 549240, FP: 4128, FN: 2281<br/>Precision: 66.96%, Recall: 78.58%, F1-measure: 72.30%<br/>elapsed_time: 1098.0065379142761 | HDFS    | True      | True              | True                   | 128         | 0.65       | 4      | 32         | 0           | 6              |
+| best threshold: 0, best threshold ratio: 0.0<br/>TP: 8369, TN: 550850, FP: 2518, FN: 2278<br/>Precision: 76.87%, Recall: 78.60%, F1-measure: 77.73%<br/>elapsed_time: 1035.9144899845123 | HDFS    | True      | False             | False                  | 128         | 0.65       | 4      | 32         | 0           | 6              |
+|                                                              |         |           |                   |                        |             |            |        |            |             |                |
+|                                                              |         |           |                   |                        |             |            |        |            |             |                |
+|                                                              |         |           |                   |                        |             |            |        |            |             |                |
+
+### 消融实验调参记录
+
+| result                                                       | dataset | is_logkey  | hypersphere _loss | hypersphere _loss_test | window_size | mask_ratio | test_ratio | Layers | batch_size | num_workers | num_candidates |
+| ------------------------------------------------------------ | ------- | ---------- | ----------------- | ---------------------- | ----------- | ---------- | ---------- | ------ | ---------- | ----------- | -------------- |
+| best threshold: 0, best threshold ratio: 0.0<br/>TP: 833, TN: 55094, FP: 242, FN: 231<br/>Precision: 77.49%, Recall: 78.29%, F1-measure: 77.89%<br/>elapsed_time: 111.56463170051575 | HDFS    | True       | False             | False                  | 128         | 0.65       | 0.1        | 4      | 32         | 0           | 6              |
+| best threshold: 0, best threshold ratio: 0.0<br/>TP: 825, TN: 54950, FP: 386, FN: 239<br/>Precision: 68.13%, Recall: 77.54%, F1-measure: 72.53%<br/>elapsed_time: 118.4754638671875 | HDFS    | True       | True              | True                   | 128         | 0.65       | 0.1        | 4      | 32         | 0           | 6              |
+| best threshold: 0, best threshold ratio: 0.0<br/>TP: 49, TN: 55208, FP: 128, FN: 1015<br/>Precision: 27.68%, Recall: 4.61%, F1-measure: 7.90%<br/>elapsed_time: 41.09920597076416 | HDFS    | True;False | True;True         | True;True              | 128         | 0.65       | 0.1        | 4      | 32         | 0           | 6              |
 
 
+
+## 代码改进方案
+
+1. Cursor+Composer 用OpenRouter代替解决方案
+2. 超参数搜索
+3. 保存每次训练、预测的超参数和F1
 
