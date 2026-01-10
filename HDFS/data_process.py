@@ -12,6 +12,8 @@ from logparser import Spell, Drain
 
 # get [log key, delta time] as input for deeplog
 input_dir  = os.path.expanduser('~/.dataset/hdfs/')
+# TODO: 本地Interperter、ssh Interperter
+# input_dir  = os.path.expanduser('../dataset/hdfs/')
 output_dir = '../output/hdfs/'  # The output directory of parsing results
 log_file   = "HDFS.log"  # The input log file name
 

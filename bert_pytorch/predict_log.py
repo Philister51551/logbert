@@ -158,7 +158,8 @@ class Predictor():
                                  num_workers=self.num_workers,
                                  collate_fn=seq_dataset.collate_fn,
                                  # TODO: 开启 pin_memory (内存锁页)
-                                 pin_memory=True)
+                                 # pin_memory=True)
+                                 )
 
         for idx, data in enumerate(data_loader):
             data = {key: value.to(self.device) for key, value in data.items()}

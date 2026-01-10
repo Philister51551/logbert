@@ -47,10 +47,10 @@ options["is_time"] = False
 
 # options["hypersphere_loss"] = False
 # TODO: 确保训练时包含超球体 Loss (保持模型结构一致)
-options["hypersphere_loss"] = False
+options["hypersphere_loss"] = True
 # options["hypersphere_loss_test"] = False
 # TODO: 显式操作测试集中超球体距离检测VHM (DeepSVDD)
-options["hypersphere_loss_test"] = False
+options["hypersphere_loss_test"] = True
 
 options["scale"] = None # MinMaxScaler()
 options["scale_path"] = options["model_dir"] + "scale.pkl"
