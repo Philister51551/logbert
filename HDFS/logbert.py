@@ -50,7 +50,7 @@ options["is_time"] = False
 options["hypersphere_loss"] = True
 # options["hypersphere_loss_test"] = False
 # TODO: 显式操作测试集中超球体距离检测VHM (DeepSVDD)
-options["hypersphere_loss_test"] = True
+options["hypersphere_loss_test"] = False
 
 options["scale"] = None # MinMaxScaler()
 options["scale_path"] = options["model_dir"] + "scale.pkl"
@@ -58,7 +58,7 @@ options["scale_path"] = options["model_dir"] + "scale.pkl"
 # model
 options["hidden"] = 256 # embedding size
 # options["layers"] = 4
-#  TODO: Layers (模型层数)，原文2
+# TODO: Layers (模型层数)，原文2
 options["layers"] = 4
 options["attn_heads"] = 4
 
@@ -118,6 +118,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     print("arguments", args)
+
+    # TODO: Debugging
+    args.mode = 'predict'
 
     if args.mode == 'train':
         Trainer(options).train()
